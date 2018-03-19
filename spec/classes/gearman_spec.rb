@@ -56,7 +56,6 @@ describe 'gearman' do
           }
         end
 
-        it { is_expected.not_to contain_class('epel') }
         it { is_expected.to contain_class('gearman::params') }
 
         let :package_ensure do
@@ -127,7 +126,6 @@ describe 'gearman' do
           }
         end
 
-        it { is_expected.to contain_class('epel') }
         it { is_expected.to contain_class('gearman::params') }
 
         let :package_ensure do
@@ -138,7 +136,7 @@ describe 'gearman' do
           end
         end
 
-        it { is_expected.to contain_package('gearmand').with_ensure(package_ensure).with_require(%r{Class\[Epel\]}i) }
+        it { is_expected.to contain_package('gearmand').with_ensure(package_ensure) }
 
         it do
           is_expected.to contain_file('/etc/sysconfig/gearmand').with(
