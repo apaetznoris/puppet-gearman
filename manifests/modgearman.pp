@@ -16,7 +16,7 @@ class gearman::modgearman(
 
   file { $config_file:
     ensure  => $ensure,
-    path    => "${config_path}/${config_file}",
+    path    => "${config_path}/",
     content => template("gearman/${config_template}"),
     require => Package[$package],
   }
