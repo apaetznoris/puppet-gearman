@@ -7,11 +7,13 @@ class gearman::modgearman(
   String $config_file     = 'worker.conf',
   String $config_template = 'worker.conf.erb',
   Hash $config            = {},
-  String $service_name    = 'mod-gearman-worker'
+  String $service_name    = 'mod-gearman-worker',
+  String $yumrepo         = undef,
 ){
 
   package { $package:
-    ensure => $ensure,
+    ensure  => $ensure,
+    require => Yumrepo[$yumrepo],
   }
 
   file { $config_file:
