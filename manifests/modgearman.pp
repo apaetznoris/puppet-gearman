@@ -21,9 +21,8 @@ class gearman::modgearman(
     require => Yumrepo[$yumrepo],
   }
 
-  file { $config_file:
+  file { "${config_path}/${config_file}":
     ensure  => $ensure,
-    path    => "${config_path}/",
     content => template("gearman/${config_template}"),
     require => Package[$package],
   }
