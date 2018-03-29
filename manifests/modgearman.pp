@@ -9,7 +9,12 @@ class gearman::modgearman(
   Hash $config            = {},
   String $service_name    = 'mod-gearman-worker',
   String $yumrepo         = undef,
+  Hash $yumrepo_config    = {},
 ){
+
+  yumrepo { $yumrepo:
+    * => $yumrepo_config
+  }
 
   package { $package:
     ensure  => $ensure,
@@ -27,6 +32,7 @@ class gearman::modgearman(
     ensure     => 'running',
     hasrestart => true,
     hasstatus  => true,
-    provider   => 'systemd'
+    provider   => 'systemd',
+    require    => Package[$package],
   }
 }
